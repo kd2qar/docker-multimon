@@ -6,11 +6,11 @@ all: build
 
 build:
 	rm -f ./debfile/*.deb
-	docker compose build --pull multimon
+	docker compose build multimon
 	docker compose run --rm --entrypoint '/bin/bash -c "cp /root/multimon_*.deb /debfile/;chmod 666 /debfile/*.deb"' multimon
-	if [ -e ./debfile/multimon_1.0-7.1_amd64.deb ]; then cp ./debfile/multimon_*.deb ./soxtest/; fi
-	docker compose build --pull oldsox
-	docker compose build --pull soxtest
+	if [ -e ./debfile/multimon_*.deb ]; then cp ./debfile/multimon_*.deb ./soxtest/; fi
+	docker compose build oldsox
+	docker compose build soxtest
 run:
 	docker compose run --rm -i multimon /bin/bash
 

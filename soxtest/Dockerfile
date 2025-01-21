@@ -2,15 +2,18 @@ FROM debian:stable-slim
 
 WORKDIR /root/
 
-ADD multimon_1.0-7.1_amd64.deb /root/multimon_1.0-7.1_amd64.deb
-
 #RUN sed -i 's:^path-exclude=/usr/share/man/*:#path-exclude=/usr/share/man/*:'   /etc/dpkg/dpkg.cfg.d/docker
 RUN sed -i 's:^path-exclude /usr/share/man/*:#path-exclude /usr/share/man/*:g' /etc/dpkg/dpkg.cfg.d/docker
 
 RUN apt-get update;
 RUN apt-get install -y man manpages man-db manpages-dev;
 RUN apt-get install -y vim vim-common sox libsox-fmt-all sudo less locate;
-RUN dpkg -i multimon_1.0-7.1_amd64.deb
+#RUN dpkg -i multimon_1.0-7.1_amd64.deb
+
+#ADD multimon_1.0-7.1_amd64.deb /root/multimon_1.0-7.1_amd64.deb
+COPY multimon_*.deb /root/
+COPY multimon_*.deb .
+RUN pwd; ls -Alh; ls -Alh /; dpkg -i multimon_*.deb
 RUN updatedb;
 
 COPY --chmod=755 <<"BASHALIAS" /root/.bash_aliases;
