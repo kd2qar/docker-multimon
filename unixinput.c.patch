@@ -1,0 +1,11 @@
+--- originals/unixinput.c	2025-01-21 09:14:08.362347782 -0500
++++ unixinput.c	2025-01-21 09:14:33.390478815 -0500
+@@ -338,7 +338,7 @@
+ 			close(pipedes[1]); /* close writing pipe end */
+ 			execlp("sox", "sox", 
+ 			       "-t", type, fname,
+-			       "-t", "raw", "-s", "-2", "-r", srate, "-",
++			       "-t", "raw", "-e", "signed-integer", "-b", "16", "-r", srate, "-",
+ 			       NULL);
+ 			perror("execlp");
+ 			exit(10);

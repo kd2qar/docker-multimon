@@ -1,0 +1,75 @@
+#
+# build multimon
+#
+services:
+  multimon:
+    container_name: multimon
+    image: kd2qar/multimon
+    build:
+      context: .
+      tags:
+        - kd2qar/multimon
+    network_mode: bridge
+    volumes:
+      - type: bind
+        source: ./originals
+        target: /lnk
+      - type: bind
+        source: ./soxfiles
+        target: /soxfiles
+      - type: bind
+        source: ./debfile
+        target: /debfile
+      #- deb-file:/debfile
+
+    command: [/bin/bash]
+
+  oldsox:
+    container_name: oldsox
+    image: kd2qar/oldsox
+    build:
+      context: oldsox
+      dockerfile: ./oldsox.Dockerfile
+      tags:
+        - kd2qar/oldsox
+    network_mode: bridge
+     
+    command: [man,sox]
+
+  soxtest:
+    # Run sox stuff
+    image: kd2qar/soxtest
+    build:
+      context: soxtest
+      tags:
+        - kd2qar/soxtest
+    hostname: soxittoya
+    network_mode: bridge
+
+    volumes:
+      - type: bind
+        source: ./soxfiles
+        target: /soxfiles
+        read_only: false
+      - type: bind
+        source: /etc/passwd
+        target: /etc/passwd
+        read_only: true
+      - type: bind
+        source: /etc/group
+        target: /etc/group
+        read_only: true
+      - type: bind
+        source: /etc/shadow
+        target: /etc/shadow
+        read_only: true
+      - type: bind
+        source: ./debfile
+        target: /debfile
+      #- deb-file:/debfile
+
+    command: /bin/bash
+
+volumes:
+  deb-file:
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#git clone git://git.code.sf.net/p/sox/code sox-code
+git clone https://git.code.sf.net/p/sox/code sox-code
+
+git tag --list
+echo "List tags with: git tag --list"
+echo "USE 'git checkout tags/<tag_name>' to pull a specific tag'

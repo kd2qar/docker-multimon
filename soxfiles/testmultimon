@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+rm -f KeyPress.wav
+gen -t wav -d '123A456B789C*0#D' ./KeyPress.wav
+multimon -t wav -a DTMF KeyPress.wav
+
+rm -f ev2.raw
+gen -t raw -d '123A456B789C*0#D' ./ev2.raw
+multimon -t raw -a DTMF ev2.raw
+

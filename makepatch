@@ -1,0 +1,26 @@
+#!/bin/batch
+##
+##
+# this creates a patch file to fix originals/gen.c with the corrected version
+#
+# the fix essentually upgrades the deprecated arguments for sox
+#
+#  1) -s  becomes -e signed-integer
+#  2) -2  becomes -b 16
+#
+#  Could use sed in the following way:
+#
+#  sed -i '/"-s"/"-e","signed-integer"/g' gen.c
+#  sed -i '/"-2"/"-b","16"/g' gen.c
+#
+#-                       execlp("sox", "sox",
+#-                              "-t", "raw",  "-s", "-2", "-r", srate, "-",
+#-                              "-t", type, fname,
+#-                              NULL);
+#+                 //execlp("sox", "sox", "-t", "raw", "-s",                  "-2",      "-r", srate, "-", "-t", type, fname, NULL);
+#+                       execlp("sox", "sox", "-t", "raw", "-e","signed-integer", "-b", "16","-r",srate, "-", "-t", type, fname, NULL);
+
+
+ 
+diff -Naru originals/gen.c gen.c > gen.c.patch
+diff -Naru originals/unixinput.c unixinput.c > unixinput.c.patch

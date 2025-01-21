@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker compose  --project-directory /docker/sox run --build --rm -i --user $(id -u):$(id -g) -v /home/$(whoami):/home/$(whoami) sox
+
