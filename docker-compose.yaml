@@ -20,7 +20,6 @@ services:
       - type: bind
         source: ./debfile
         target: /debfile
-      #- deb-file:/debfile
 
     command: [/bin/bash]
 
@@ -66,10 +65,6 @@ services:
       - type: bind
         source: ./debfile
         target: /debfile
-      #- deb-file:/debfile
 
     command: /bin/bash
-
-volumes:
-  deb-file:
 

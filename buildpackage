@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Just build the multimon deb package and cleanup.
+#
+
+rm -f ./debfile/*.deb
+docker compose build --pull multimon
+docker compose run --rm --entrypoint '/bin/bash -c "cp /root/multimon_*.deb /debfile/;chmod 666 /debfile/*.deb"' multimon
+docker rmi kd2qar/multimon
+
+echo "build package is in the ./debfile directory:"
+ls -lh ./debfile
+
