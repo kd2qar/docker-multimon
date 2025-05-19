@@ -1,5 +1,6 @@
 # docker-multimon
-Docker container to build a patched Debian package binary that fixes incompatibilities between multimon and newer versions of sox
+Docker container to build a patched Debian package binary that fixes incompatibilities between multimon and newer versions of sox.
+Multimon is a program to decode digital radio transmissions.
 
 
 ## Usage
